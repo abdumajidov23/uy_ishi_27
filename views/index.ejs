@@ -1,8 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("./partials/head.ejs") %>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:20vh;
+            /* text-align: center; */
+            /* left: 1; */
+            /* background-color:#ffffff; */
+            /* box-shadow: */
+            /* 10px 8px 6px 0 rgba(0,0,0,0.2); */
+            background-color:#ffffff;
+        }
+        .box{
+            position:relative;
+            width:400px;
+            height:410px;
+            display:flex;
+            align-items:center;
+            justify-content:space-evently;
+        }
+        .box span{
+            display:block;
+            height:20px;
+            width:20px;
+            background:#000;
+            border-radius:50%;
+            animation:all-effect 0.6s linear infinite alternate;
+            transform:scale(0);
+        }
+        .box span:nth-child(1){
+            animation-delay:0.1s;
+        }
+        .box span:nth-child(2){
+            animation-delay:0.2s;
+        }
+        .box span:nth-child(3){
+            animation-delay:0.3s;
+        }
+        .box span:nth-child(4){
+            animation-delay:0.4s;
+            background:#00b9f5;
+        }
+        .box span:nth-child(5){
+            animation-delay:0.5s;
+            background:#00b9f5;
+        }
+        @keyframes all-effect{
+            100%{
+                transform:scale(1);
+            }
+        }
+      
+    </style>
+
 <body>
     <h1>Asosiy sahifa</h1>
     <%- include("./partials/nav.ejs") %>
+    <h1>Test jarayonida</h1>
+    <div class="container">
+        <div class="box">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
 </body>
 </html>

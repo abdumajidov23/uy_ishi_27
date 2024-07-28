@@ -1,9 +1,20 @@
 <nav>
     <ul>
-        <li class="active1 "><a href="/">Home</a></li>
+        <li class="<%= activePage === 'home' ? 'active' : '' %>"><a href="/">Home</a></li>
+        <li class="<%= activePage === 'users' ? 'active' : '' %>"><a href="/users">Users</a></li>
+        <li class="<%= activePage === 'jobs' ? 'active' : '' %>"><a href="/jobs">Jobs</a></li>
+        <li class="<%= activePage === 'gallery' ? 'active' : '' %>"><a href="/gallery">Gallery</a></li>
+        <li class="<%= activePage === 'contact' ? 'active' : '' %>"><a href="/contact">Contacts</a></li>
+    </ul>
+</nav>
+
+<!-- 
+<nav>
+    <ul>
+        <li class="active"><a href="/">Home</a></li>
         <li><a href="/users">Users</a></li>
         <li><a href="/jobs">Jobs</a></li>
         <li><a href="/gallery">Gallery</a></li>
         <li><a href="/contact">contacts</a></li>
     </ul>
-</nav>
+</nav> -->
