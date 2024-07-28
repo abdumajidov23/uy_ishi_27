@@ -1,0 +1,28 @@
+const express = require('express');
+const axios = require('axios');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+// EJS shablonlarini ishlatish
+app.set('view engine', 'ejs');
+
+// Statik fayllarni xizmat qilish
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Foydalanuvchilarni olish va sahifani yuklash
+app.get('/', async (req, res) => {
+    try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        const users = response.data;
+        res.render('index', { users });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Serverda xatolik yuz berdi');
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server http://localhost:${PORT} manzilida ishlamoqda`);
+});

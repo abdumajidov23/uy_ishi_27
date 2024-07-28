@@ -1,107 +1,49 @@
-// const os = require('os');
-// console.log("joy: ", os.totalmem() / 1024 / 1024);
-// console.log("bo'sh joy: ", os.freemem() / 1024 / 1024);
-// const path = require('path');
-require("dotenv").config()
-const PORT = process.env.PORT
-
+require("dotenv").config();
 const express = require('express');
 const path = require('path');
-const mor = require('morgan');
-const { title } = require("process");
-const { log } = require("console");
+const morgan = require('morgan');
+const axios = require('axios');
 
-const createViewPath = (page) =>{
-    return path.join(__dirname, "views", `${page}.ejs`);
-}
+const PORT = process.env.PORT || 3000;
 
 const app = express();
-app.set("wiew engine","ejs")
-app.use(mor("tiny"))
+app.set('view engine', 'ejs');
+app.use(morgan('tiny'));
 
+// Foydalanuvchi shablon yo'lini yaratish
+const createViewPath = (page) => path.join(__dirname, 'views', `${page}.ejs`);
 
 app.get('/', (req, res) => {
-  res.render(createViewPath("index"),{title:"Main"});
-})
+    res.render(createViewPath('index'), { title: 'Main' });
+});
 
-app.get('/users', (req, res) => {
-    const users =[
-      {name:"John", age:20},
-      {name:"Alice", age:30},
-      {name:"Bob", age:25}
-    ]
-    users.forEach(user =>{
-        console.log(user);
-    });
-  res.render(createViewPath("users"),{title:"user",users});
-})
+app.get('/users', async (req, res) => {
+    try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        const users = response.data;
+        res.render(createViewPath('users'), { title: 'Users', users });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Serverda xatolik yuz berdi');
+    }
+});
 
 app.get('/contact', (req, res) => {
-  res.render(createViewPath("contact"),{title:"contact"});
-})
+    res.render(createViewPath('contact'), { title: 'Contact' });
+});
 
 app.get('/gallery', (req, res) => {
-  res.render(createViewPath("gallery"),{title:"gallery"});
-})
+    res.render(createViewPath('gallery'), { title: 'Gallery' });
+});
 
 app.get('/jobs', (req, res) => {
-  res.render(createViewPath("jobs"),{title:"jobs"});
-})
+    res.render(createViewPath('jobs'), { title: 'Jobs' });
+});
 
 app.listen(PORT, () => {
-  console.log(`\nServer running at http://localhost:${PORT}`)
-})
-
+    console.log(`\nServer running at http://localhost:${PORT}`);
+});
 
 app.use((req, res) => {
-    res.render(createViewPath("error"),{title:"xatolik"})
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.get('/', (req, res) => {
-//   res.send('Hello, World!')
-// })
-
-// app.get('/about' , function (req, res) {
-//     res.send('about')
-// })
-
-// app.get('/users?', function (req, res) {
-//     res.send('users')
-// })
-
-// app.get('/ab?cd', (req, res) => {
-//     res.send('ab?cd')
-// })
-
-// app.get('/ab+cd', (req, res) => {
-//     res.send('ab+cd')
-// })
-
-// app.get('/admin/:adminId', (req, res) => {
-//     // res.send(req.params)
-//     res.send(req.params.adminId)
-// })
-
-// app.get('/admin/:adminId/staff/:staffId', (req, res) => {
-//     // res.send(req.params)
-//     res.send(req.params.staffId)
-// })
-
-
-
-// app.listen(PORT, () => {
-//   console.log(`\nServer running at http://localhost:${PORT}`)
-// })
+    res.render(createViewPath('error'), { title: 'Xatolik' });
+});
