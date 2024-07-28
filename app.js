@@ -6,8 +6,8 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3000;
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const tg_bot = process.env.tg_bot;
+const tg_id = process.env.tg_id;
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -26,11 +26,12 @@ app.post('/send-message', async (req, res) => {
     const text = `Yangi xabar:\n\nIsm: ${name}\nEmail: ${email}\nXabar: ${message}`;
 
     try {
-        await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-            chat_id: TELEGRAM_CHAT_ID,
+        await axios.post(`https://api.telegram.org/bot${tg_bot}/sendMessage`, {
+            chat_id: tg_id,
             text: text
         });
         res.send('Xabar muvaffaqiyatli yuborildi');
+        
     } catch (error) {
         console.error(error);
         res.status(500).send('Xabarni yuborishda xatolik yuz berdi');

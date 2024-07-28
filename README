@@ -1,0 +1,15 @@
+- ishga tushirish kod app.js da .
+   npm run dev
+
+formda yuborilgan xabar telegram botga yuboriladi
+
+- https://t.me/test_uy_ishi_28_bot
+
+botga start bosing . 
+o'zingizni telegram id raqamingizmi .env faylga o'rnating 
+natijada sizga xabar shu ko'rinishda  keladi: 
+Yangi xabar:
+
+Ism: Alijon
+Email: alijonabdumajidov09@gmail.com
+Xabar: salom
