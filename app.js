@@ -10,7 +10,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(morgan('tiny'));
 
-// Foydalanuvchi shablon yo'lini yaratish
 const createViewPath = (page) => path.join(__dirname, 'views', `${page}.ejs`);
 
 app.get('/', (req, res) => {
@@ -29,7 +28,12 @@ app.get('/users', async (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
-    res.render(createViewPath('contact'), { title: 'Contact' });
+    const contactInfo = {
+        phone: "123-456-7890",
+        email: "contact@example.com",
+        address: "123 Main St, Anytown, USA"
+    };
+    res.render(createViewPath('contact'), { title: 'Contact', contactInfo });
 });
 
 app.get('/gallery', (req, res) => {
@@ -37,7 +41,12 @@ app.get('/gallery', (req, res) => {
 });
 
 app.get('/jobs', (req, res) => {
-    res.render(createViewPath('jobs'), { title: 'Jobs' });
+    const jobs = [
+        { title: "Software Engineer", location: "San Francisco, CA", salary: "$120,000" },
+        { title: "Data Scientist", location: "New York, NY", salary: "$110,000" },
+        { title: "Product Manager", location: "Austin, TX", salary: "$100,000" }
+    ];
+    res.render(createViewPath('jobs'), { title: 'Jobs', jobs });
 });
 
 app.listen(PORT, () => {
