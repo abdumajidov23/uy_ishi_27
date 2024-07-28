@@ -2,75 +2,110 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <style>
-        *{
-            padding:0;
-            margin:0;
-        }
-        .container{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:20vh;
-            /* text-align: center; */
-            /* left: 1; */
-            /* background-color:#ffffff; */
-            /* box-shadow: */
-            /* 10px 8px 6px 0 rgba(0,0,0,0.2); */
-            background-color:#ffffff;
-        }
-        .box{
-            position:relative;
-            width:400px;
-            height:410px;
-            display:flex;
-            align-items:center;
-            justify-content:space-evently;
-        }
-        .box span{
-            display:block;
-            height:20px;
-            width:20px;
-            background:#000;
-            border-radius:50%;
-            animation:all-effect 0.6s linear infinite alternate;
-            transform:scale(0);
-        }
-        .box span:nth-child(1){
-            animation-delay:0.1s;
-        }
-        .box span:nth-child(2){
-            animation-delay:0.2s;
-        }
-        .box span:nth-child(3){
-            animation-delay:0.3s;
-        }
-        .box span:nth-child(4){
-            animation-delay:0.4s;
-            background:#00b9f5;
-        }
-        .box span:nth-child(5){
-            animation-delay:0.5s;
-            background:#00b9f5;
-        }
-        @keyframes all-effect{
-            100%{
-                transform:scale(1);
-            }
-        }
-      
-    </style>
+       .form4 {
+    background-color:#ffffff;
+    background-size: cover;
+}
+
+.top {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    
+}
+
+.form-bg {
+    background: rgba(26, 24, 24, 0.77);
+    padding: 5px;
+    border-radius: 10px;
+    max-width: 600px;
+    /* margin: 0; */
+
+    
+    /* border: 1px solid #ddd; */
+    
+    /* text-align: center; */
+}
+
+.form {
+    background-color: white !important;
+    padding: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 10px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.form-control {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid #61615e;
+    background: transparent;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    font-size: 30px;
+}
+
+button.btn {
+    display: block;
+    padding: 11px 32px;
+    text-align: center;
+}
+button:hover{
+    background-color: #3b5998;
+    color: #fff;
+    border: 1px solid #3b5998;
+    text-align: center;
+}
+
+.btn-blue {
+    background-color: #4285f4;
+    color: #fff;
+    border: 1px solid #4285f4;
+    
+}
+</style>
 
 <body>
     <h1>Asosiy sahifa</h1>
     <%- include("./partials/nav.ejs") %>
-    <h1>Test jarayonida</h1>
-    <div class="container">
-        <div class="box">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+    <h1>Taklif va Shikoyatingiz bo'lsa so'rov nomada o'z fikringizni yozib qoldiring ! </h1>
+    <div class="form4 top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-md-offset-2">
+                    <div class="form-bg">
+                        <form class="form" action="/send-message" method="POST">
+                            <div class="form-group">
+                                <label class="sr-only">Name</label>
+                                <input type="text" class="form-control" required="" name="name" id="nameNine" placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only">Email</label>
+                                <input type="email" class="form-control" required="" name="email" id="emailNine" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only">Message</label>
+                                <textarea class="form-control" required="" rows="7" name="message" id="messageNine" placeholder="Write message"></textarea>
+                            </div>
+                            <button type="submit" class="btn text-center btn-blue">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

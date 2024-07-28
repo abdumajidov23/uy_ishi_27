@@ -3,17 +3,38 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const axios = require('axios');
+const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3000;
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 const app = express();
 app.set('view engine', 'ejs');
 app.use(morgan('tiny'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const createViewPath = (page) => path.join(__dirname, 'views', `${page}.ejs`);
 
 app.get('/', (req, res) => {
     res.render(createViewPath('index'), { title: 'Main', activePage: 'home' });
+});
+
+app.post('/send-message', async (req, res) => {
+    const { name, email, message } = req.body;
+
+    const text = `Yangi xabar:\n\nIsm: ${name}\nEmail: ${email}\nXabar: ${message}`;
+
+    try {
+        await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            chat_id: TELEGRAM_CHAT_ID,
+            text: text
+        });
+        res.send('Xabar muvaffaqiyatli yuborildi');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Xabarni yuborishda xatolik yuz berdi');
+    }
 });
 
 app.get('/users', async (req, res) => { 
